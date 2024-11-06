@@ -67,23 +67,100 @@ public class SortingAlgorithms {
     public void insertionSort(boolean print) {
         int sortedN = 1; // length of sorted array
         int unsortedN = this.array.length - 1; // length of unsorted array
-        int current; 
+        int current; // we will use this to check if the first number in the unsorted array is less than the last number in the sorted array
         int temp; 
 
-        for (int i = 0; i < this.array.length - 1; i++){
+        if (print) {
+            System.out.println("Before insertionSort: " + this.toString());
+        }
+
+        // n - 1 iterations
+        for (int i = 0; i < this.array.length - 1; i++) { // the first num in the array is automatically part of the "sorted" section, so we only look at n-1 elements in the array
             current = this.array[sortedN]; // the first number in the unsorted array
-            
+            if (print) {
+                System.out.println("i = " + i);
+            }
+
+            // best case: 0 times, worst case: n times 
             for (int j = sortedN; j > 0 && current < this.array[j-1]; j--) {
                 temp = this.array[j-1]; 
-                this.array[j-1] = current; 
-                this.array[j] = temp; 
+                this.array[j-1] = current; // n times
+                this.array[j] = temp; // n times
+                
+                if (print) {
+                    System.out.printf("\tAfter j = %d: " + this.toString() + "\n", j);
+                }
 
             }
             sortedN++; 
             unsortedN--; 
 
            
+        }
+    }
+
+    // mergeSort halves the array
+    // then mergeSort calls itself to sort the halves
+    // 1. sorts first half of array
+    // 2. sorts second half of array
+    // 3. merges halves
+
+
+
+    // helper function for mergeSort
+    public void merge(boolean print, int[] tempArr, int first, int last, int mid) { 
+        int first1 = first; 
+        int last1 = mid; 
+        int first2 = mid + 1; 
+        int last2 = last; 
+        
+        
+        int index = first1; // next available location in tempArray
+
+        while ((first1 <= last1) && (first2 <= last2)) {
+            if (this.array[first1] < this.array[first2]) {
+                tempArr[index] = this.array[first1]; 
+                first1++; 
+            } else {
+                tempArr[index] = this.array[first2]; 
+                first2++; 
             }
+
+            index++; 
+        } // end while
+
+        while (first1 <= last1) {
+            tempArr[index] = theArr[first1]; 
+            first1++; 
+            index++; 
+        } // end while
+
+        while (first2 <= last2) {
+            tempArr[index] = theArr[first2];
+            first2++; 
+            index++; 
+        } // end while
+
+        for (index = first; index <= last; index++) {
+            this.array[index] = tempArr[index]; 
+        }
+        
+    }
+
+    private int[] quickSort() {
+
+    }
+    private int[] partitionHelper() {
+        int randomPivotIndex = (int) (Math.random()*this.array.length); 
+        int temp; 
+
+        temp = this.array[0]; 
+        this.array[0] = this.array[randomPivotIndex]; 
+        this.array[randomPivotIndex] = temp; 
+
+        for (int i = 1; i < this.array.length; i++) {
+            if (this.arra)
+        }
     }
 
     
